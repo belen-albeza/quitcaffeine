@@ -7,8 +7,14 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] ||
 
 
 require 'user'
+require 'source'
 
 # create DB
 DataMapper.finalize
 DataMapper.auto_upgrade!
+
+def reset_db
+  DataMapper.auto_migrate!
+  Source.load_fixtures()
+end
 
