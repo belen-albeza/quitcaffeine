@@ -13,11 +13,20 @@ require 'models'
 require 'helpers'
 
 get '/' do
-  login_required  
-  @sources = Source.all(:order => [:mg.asc])
-  @shots = @user.latest_shots
-  @stats = @user.stats_summary
+  if @user
+    @sources = Source.all(:order => [:mg.asc])
+    @shots = @user.latest_shots
+    @stats = @user.stats_summary
+    
+    template = :index
+  else 
+    template = :anonymous
+  end
   
-  erb :index
+  erb template
+end
+
+get '/about' do
+  erb :wawa
 end
 

@@ -23,7 +23,7 @@ class User
     source = source || self.user_settings.source_to_track
     query = {:order => [:created_at.desc]}
     query[:source] = source unless source.nil?
-    Shot.first(query)
+    self.shots.first(query)
   end
   
   def stats_summary
@@ -35,13 +35,17 @@ class User
                          self.source_to_track)}
   end
   
+  def full_stats
+    stats_summary
+  end
+  
   def shots_for_day(date)
     self.shots.all(:created_at.gte => date,
                    :created_at.lt => date + 1)
   end
   
   def caffeine_for_day(date)
-    shots_for_day(date).sum(:mg)
+    shots_for_day(date).sum(:mg) || 0
   end
   
   def units_of_source_for_day(date, source)

@@ -32,6 +32,10 @@ module Social
       return !session[:tw_screen_name].nil?
     end
     
+    def tweet!(message)
+      @client.update(message)
+    end
+    
     protected    
     
     def get_access_token(session)

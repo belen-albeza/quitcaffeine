@@ -1,4 +1,5 @@
 require 'user/model'
+require 'user/helpers'
 require 'source/model'
 
 class Shot
@@ -10,7 +11,15 @@ class Shot
   
   belongs_to :source
   belongs_to :user
-
+  
+  def shared_message(url)
+    "I've just had #{self.source.description} #{url}"
+  end
+  
+  # =================
+  # = class methods =
+  # =================
+  
   def Shot.create_for_user(user_id, source_slug)
     user = User.get(user_id)
     source = Source.first(:slug => source_slug)
@@ -20,4 +29,5 @@ class Shot
       nil
     end
   end
+  
 end

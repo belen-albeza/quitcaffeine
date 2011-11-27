@@ -7,10 +7,18 @@ require 'data_mapper'
 require 'time-lord'
 
 helpers do
-  def home_url
-    '/'
+  def permalink(url)
+    @base_url ||= "#{request.env['rack.url_scheme']}://#{request.env['HTTP_HOST']}"
+    "#{@base_url}#{url}"
   end
   
+  def home_url
+    '/' 
+  end
+  
+  def about_url
+    '/about'
+  end
   
   def ago(date)
     Time.parse(date.to_s).ago_in_words

@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<head>
+	<meta charset="utf-8" />
+	<title>I'm quitting caffeine!</title>	
+</head>
+<body>
+	<header>
+		<h1><a href="<%= home_url %>">I'm quitting caffeine!</a></h1>
+		<% if @user %>
+		<p>Hi, <a href="<% profile_url @user %>">@<%= @user.username%></a> | <a href="<%= logout_url %>">Logout</a>
+		<% else %>
+		<p>Hi, stranger! <a href="/twitter/connect" id="twitter-login"><img src="/images/twitter_small.png" alt="Twitter login" /> Login with Twitter</a>
+		<% end %>
+	</header>
+	
+	<%= yield %>
+	
+	<footer>
+	<p>Hand-crafted with love by <a href="https://github.com/belen-albeza">Belén Albeza</a>. Wanna <a href="<%= about_url %>">know more</a>?</p>
+	</footer>
+	
+</body>
+</html>

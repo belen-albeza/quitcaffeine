@@ -1,0 +1,9 @@
+<dt>
+	<dt>Caffeine consumed today</dt>
+	<dd><%= @stats[:caffeine_for_today] %> mg</dd>
+	
+	<% if @stats[:source_to_track] %>
+	<dt><%= "#{@stats[:source_to_track].capitalize}" %> units consumed today:</dt>
+	<dd><%= @stats[:units_for_today] %></dd>
+	<% end %>
+</dt>

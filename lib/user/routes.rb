@@ -1,11 +1,6 @@
 require 'sinatra'
 require 'user/twitter'
 require 'user/model'
-  
-get '/login' do 
-  redirect '/' if session[:user_id]
-  erb :login
-end    
 
 get '/logout' do
   session.clear
@@ -31,7 +26,10 @@ get '/profile/:username' do
   @profile_user = User.first(:username => params[:username])
   if @profile_user.nil?  
     raise Sinatra::NotFound    
-  else
-    erb :profile    
   end
+  
+  @shots = @profile_user.latest_shots
+  @stats = @profile_user.full_stats
+  
+  erb :profile    
 end
