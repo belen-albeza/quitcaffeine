@@ -7,6 +7,7 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] ||
 
 
 require 'user'
+require 'user_settings'
 require 'source'
 require 'shot'
 

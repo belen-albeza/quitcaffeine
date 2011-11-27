@@ -16,7 +16,7 @@
 			<h1>Have a shot</h1>
 		</header>
 		
-		<%= partial :sources, @sources %>		
+		<%= partial :have_a_shot, @sources %>		
 	</section>
 	
 	<section>
@@ -28,8 +28,8 @@
 	</section>
 	
 	<footer>
-		<p>Logged in as <strong>@<%= @user.username %></strong></p>
-		<p><small>(<a href="/logout">Logout</a>)</p>	
+		<p>Logged in as <strong>@<%= @user.username %></strong> | <a href="/logout">Logout</a><br>
+		<a href="<%= show_settings_url %>">Settings</a></p>	
 	</footer>
 	
 </body>

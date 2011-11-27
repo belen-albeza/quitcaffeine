@@ -4,10 +4,10 @@ require 'user/twitter'
 helpers do
   def login_required
     twitter = Social::Twitter.new(settings.twitter_config, session)
-    user_info = session[:tw_user_info]
+    tw_screen_name = session[:tw_screen_name]
 
-    if user_info
-      @user = User.get_or_create(user_info['screen_name'])
+    unless tw_screen_name.nil?
+      @user = User.get_or_create(tw_screen_name)
       session[:user_id] = @user.id
     else
       @user = nil

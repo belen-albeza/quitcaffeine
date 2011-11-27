@@ -8,6 +8,7 @@ class Source
   property :mg, Integer, :default => 0
   
   has n, :shots
+  # belongs_to :user_settings, :required => false
   
   def Source.load_fixtures
     Source.create(:slug => 'coke',

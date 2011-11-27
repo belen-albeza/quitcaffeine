@@ -26,10 +26,10 @@ module Social
       if @client.authorized? and not access_token.nil?
         session[:tw_access_token] = access_token.token
         session[:tw_secret_token] = access_token.secret
-        session[:tw_user_info] = @client.info
+        session[:tw_screen_name] = @client.info['screen_name']
       end
       
-      return !session[:tw_user_info].nil?
+      return !session[:tw_screen_name].nil?
     end
     
     protected    

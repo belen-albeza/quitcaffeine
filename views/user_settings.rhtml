@@ -1,0 +1,55 @@
+<header>
+	<h1>Settings</h1>
+</header>
+
+<form action="<%= edit_settings_url %>" method="post">
+	<table>
+		<!-- enable automatic tweeting -->
+		<tr>
+			<th>
+				<label for="s_tweets">Enable tweeting?</label>
+			</th>
+			<td>
+				<input type="checkbox" id="s_tweets" name="enable_tweets" value="true" <%= 'checked' if @settings.enable_tweets %> />
+			</td>
+		</tr>
+		<!-- enable public profile -->
+		<tr>
+			<th>
+				<label for="s_profile">Enable public profile?</label>
+			</th>
+			<td>
+				<input type="checkbox" id="s_profile" name="enable_public_profile" value="true" <%= 'checked' if @settings.enable_public_profile %> />
+			</td>
+		</tr>
+		
+		<!-- caffeine source to track -->
+		<tr>
+			<th>What do you want to quit?</th>
+			<td>
+				<ul>
+					<li><label>
+						<input type="radio" name="source_to_track" value="all" <%= 'checked' if @settings.source_to_track.nil? %> />
+						All caffeine!
+					</label></li>
+					
+					<% for item in @sources %>
+					<li><label>
+							<input type="radio" name="source_to_track" value="<%= item.slug %>" <%= 'checked' if @settings.source_to_track == item %> />
+							<%= item.name.capitalize %>
+					</label></li>
+					<% end %>
+				</dl>
+			</td>
+		</tr>
+		
+		<tr>
+			<th>&nbsp;</th>
+			<td><input type="submit" value="Save settings">
+		</tr>
+	</table>
+</form>
+
+<footer>
+<p><a href="<%= home_url %>">Back to home</a></p>	
+</footer>
