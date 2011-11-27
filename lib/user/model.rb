@@ -10,6 +10,10 @@ class User
   has n, :shots
   has 1, :user_settings
   
+  def latest_shots
+    self.shots.all(:order => [:created_at.desc])[0..10]
+  end
+  
   # =================
   # = Class methods =
   # =================
@@ -21,9 +25,7 @@ class User
       user.user_settings = UserSettings.new
       user.save()
     end
-    
-    puts user
-    
+      
     return user
   end
 end
