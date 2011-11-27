@@ -10,6 +10,7 @@ helpers do
     
     if user_info
       @user = User.get_or_create(user_info['screen_name'])
+      session[:user_id] = @user.id
     else
       @user = nil
       redirect '/login'

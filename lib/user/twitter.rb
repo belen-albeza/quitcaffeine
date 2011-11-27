@@ -30,7 +30,7 @@ module Social
       end
       
       return !session[:tw_user_info].nil?
-    end 
+    end
     
     protected    
     

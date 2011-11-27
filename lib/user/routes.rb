@@ -3,9 +3,14 @@ require 'user/twitter'
 require 'user/model'
   
 get '/login' do 
-  # redirect '/' if user
+  redirect '/' if session[:user_id]
   erb :login
 end    
+
+get '/logout' do
+  session.clear
+  redirect '/'
+end
 
 get '/twitter/connect' do
   twitter = Social::Twitter.new(settings.twitter_config, session)  
@@ -15,7 +20,6 @@ end
 get '/twitter/callback' do
   twitter = Social::Twitter.new(settings.twitter_config, session)
   if twitter.authenticate!(session)
-    # TODO: tie twitter user to our user
     redirect '/'
   else
     status 403
