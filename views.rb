@@ -14,6 +14,9 @@ require 'helpers'
 
 get '/' do
   login_required
+  @sources = Source.all(:order => [:mg.asc])
+  @shots = @user.shots(:order => [:created_at.desc])
+  puts @shots
   erb :index
 end
 

@@ -1,0 +1,16 @@
+<nav>
+	<form action="<%= new_shot_url %>" method="post">
+		
+	<dl>
+	<% for item in @sources %>
+		<dt><label>
+			<input type="radio" name="source_slug" value="<%= item.slug %>">
+			<%= item.name.capitalize %>
+		</label></dt>
+		<dd><%= item.mg %> mg</dd>
+	<% end %>
+	</dl>
+	
+	<p><input type="submit" value="Drink it!"></p>
+	</form>	
+</nav>

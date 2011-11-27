@@ -1,0 +1,8 @@
+<ul>
+<% for shot in @shots %>
+<li>
+	<strong><%= shot.source.description %></strong>
+	<%= ago shot.created_at %>
+</li>
+<% end %>
+</ul>

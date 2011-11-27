@@ -7,6 +7,8 @@ class Source
   property :slug, String, :unique_index => true
   property :mg, Integer, :default => 0
   
+  has n, :shots
+  
   def Source.load_fixtures
     Source.create(:slug => 'coke',
                   :name => 'coke',

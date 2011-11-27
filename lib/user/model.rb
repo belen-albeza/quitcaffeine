@@ -5,6 +5,8 @@ class User
   property :username, String, :unique_index => true
   property :created_at, DateTime
   
+  has n, :shots
+  
   # =================
   # = Class methods =
   # =================

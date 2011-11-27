@@ -11,6 +11,22 @@
 		<h1>I'm quitting caffeine!</h1>
 	</header>
 	
+	<section>
+		<header>
+			<h1>Have a shot</h1>
+		</header>
+		
+		<%= partial :sources, @sources %>		
+	</section>
+	
+	<section>
+		<header>
+			<h1>Your shots</h1>
+		</header>
+		
+		<%= partial :shots, @shots %>
+	</section>
+	
 	<footer>
 		<p>Logged in as <strong>@<%= @user.username %></strong></p>
 		<p><small>(<a href="/logout">Logout</a>)</p>	

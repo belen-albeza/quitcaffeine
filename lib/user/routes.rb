@@ -28,7 +28,6 @@ get '/twitter/callback' do
 end
 
 get '/profile/:username' do
-  puts params[:username]
   @profile_user = User.first(:username => params[:username])
   if @profile_user.nil?  
     raise Sinatra::NotFound    
