@@ -12,9 +12,8 @@
 	</header>
 	
 	<footer>
-		<p>Hello, <%= "#{user.client.info}" %></p>
-		<hr>
-		<p><%= session %></p>
+		<p>Logged in as <strong><%= @user.username %></strong></p>
+		<p><small>(member since <time><%= since @user.created_at %></time></small>)</p>	
 	</footer>
 	
 </body>
