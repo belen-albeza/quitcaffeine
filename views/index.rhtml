@@ -21,10 +21,30 @@
 	
 	<section>
 		<header>
-			<h1>Your shots</h1>
+			<h1>Your latest shots</h1>
 		</header>
 		
 		<%= partial :shots, @shots %>
+	</section>
+	
+	<section>
+		<header><h1>Stats</h1></header>
+		
+		<% if @stats[:last_shot] %>
+		<p>You had your last <%= @stats[:source_to_track] || 'drink' %> <%= ago @user.last_shot.created_at %>.</p>
+		<% else %>
+		<p>You haven't had any <%= @stats[:source_to_track] %> yet.</p>
+		<% end %>
+		
+		<dt>
+			<dt>Caffeine consumed today</dt>
+			<dd><%= @stats[:caffeine_for_today] %> mg</dd>
+			
+			<% if @stats[:source_to_track] %>
+			<dt><%= "#{@stats[:source_to_track].capitalize}" %> units consumed today:</dt>
+			<dd><%= @stats[:units_for_today] %></dd>
+			<% end %>
+		</dt>
 	</section>
 	
 	<footer>

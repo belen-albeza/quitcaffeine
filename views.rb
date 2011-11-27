@@ -13,10 +13,11 @@ require 'models'
 require 'helpers'
 
 get '/' do
-  login_required
+  login_required  
   @sources = Source.all(:order => [:mg.asc])
   @shots = @user.latest_shots
-  puts @shots
+  @stats = @user.stats_summary
+  
   erb :index
 end
 

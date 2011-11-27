@@ -6,6 +6,7 @@ class Shot
   
   property :id, Serial
   property :created_at, DateTime
+  property :mg, Integer, :required => true # to avoid a JOIN when counting mg
   
   belongs_to :source
   belongs_to :user
@@ -14,7 +15,7 @@ class Shot
     user = User.get(user_id)
     source = Source.first(:slug => source_slug)
     if user and source
-      Shot.create(:user => user, :source => source)
+      Shot.create(:user => user, :source => source, :mg => source.mg)
     else 
       nil
     end
