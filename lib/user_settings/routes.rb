@@ -17,5 +17,5 @@ post '/settings' do
   login_required
   @user.user_settings.update_with_form(params)  
   
-  redirect show_settings_url
+  redirect settings_url
 end

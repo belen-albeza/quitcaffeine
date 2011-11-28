@@ -2,3 +2,5 @@
 .DS_Store
 .bundle
 Gemfile.lock
+.sass-cache
+public/config.rb

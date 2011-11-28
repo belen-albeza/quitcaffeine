@@ -1,17 +1,16 @@
 <nav>
 	<form action="<%= new_shot_url %>" method="post">
 		
-	<dl>
+	<ul>
 	<% @sources.each_with_index do |item, index| %>
-		<dt><label>
+		<li class="<%= item.slug %>"><label>
 			<input type="radio" name="source_slug" value="<%= item.slug %>" <%= 'checked' if item == @user.source_to_track || ( @user.source_to_track.nil? and index == 0) %>>
-			<%= item.name.capitalize %>
-		</label></dt>
-		<dd><%= item.mg %> mg</dd>
+			<span class="name"><%= item.name.capitalize %></span>
+			<!-- <span class="mg"><%= item.mg %> mg</span> -->
+		</label></li>
 	<% end %>
-	</dl>
+	</ul>
 	
-	<p><label><input type="checkbox" name="tweet_this" value="yes" <%= 'checked' if @user.user_settings.enable_tweets %>> Tweet this</label></p>
-	<p><input type="submit" value="Drink it!"></p>
+	<p><input type="submit" value="Drink it!"> <label><input type="checkbox" name="tweet_this" value="yes" <%= 'checked' if @user.user_settings.enable_tweets %>> Tweet this?</label></p>
 	</form>	
 </nav>

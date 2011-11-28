@@ -1,4 +1,4 @@
-<section>
+<section id="shot">
 	<header>
 		<h1>Have a shot</h1>
 	</header>
@@ -6,20 +6,30 @@
 	<%= partial :have_a_shot, @sources %>		
 </section>
 
-<section>
-	<header>
-		<h1>Your latest shots</h1>
-	</header>
-	
-	<%= partial :shots, @shots %>
+<section id="summary">
+	<section id="stats">
+		<header><h1>Stats</h1></header>
+
+		<% if @stats[:last_shot] %>
+		<p class="last-drink">You had your last <%= @stats[:source_to_track] || 'drink' %> <strong><%= ago @user.last_shot.created_at %></strong>.</p>
+		
+		<p class="tip"><span class="tip">Tip</span> <a href="<%= settings_url %>">Change your settings</a> to track a specific caffeine source.</p>
+		<% end %>
+
+		<%= partial :stats_mini, @stats %>
+		
+		<p>See more stats <a href="<%= profile_url(@user) %>">in your profile</a>.
+	</section>
+
+	<section id="latest">
+		<header>
+			<h1>Your latest shots</h1>
+		</header>
+
+		<%= partial :shots, @shots %>
+	</section>	
 </section>
 
-<section>
-	<header><h1>Stats</h1></header>
-	
-	<% if @stats[:last_shot] %>
-	<p>You had your last <%= @stats[:source_to_track] || 'drink' %> <%= ago @user.last_shot.created_at %>.</p>
-	<% end %>
-	
-	<%= partial :stats_mini, @stats %>
-</section>
+<%= partial :tips %>
+
+

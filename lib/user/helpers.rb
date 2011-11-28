@@ -25,4 +25,8 @@ helpers do
   def logout_url
     '/logout'
   end
+  
+  def login_url
+    '/twitter/connect'
+  end
 end

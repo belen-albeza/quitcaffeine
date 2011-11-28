@@ -2,18 +2,26 @@
 <head>
 	<meta charset="utf-8" />
 	<title>I'm quitting caffeine!</title>	
+
+	<link href='http://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" charset="utf-8">
 </head>
 <body>
 	<header>
-		<h1><a href="<%= home_url %>">I'm quitting caffeine!</a></h1>
+	<div>
+		<h1><a href="<%= home_url %>">I'm quitting <strong>caffeine</strong>!</a></h1>
 		<% if @user %>
-		<p>Hi, <a href="<% profile_url @user %>">@<%= @user.username%></a> | <a href="<%= logout_url %>">Logout</a>
+		<p>Hi, <a  href="<%= profile_url @user %>" class="user">@<%= @user.username%></a> | <a href="<%= settings_url %>">Settings</a> | <a href="<%= logout_url %>">Logout</a>
 		<% else %>
 		<p>Hi, stranger! <a href="/twitter/connect" id="twitter-login"><img src="/images/twitter_small.png" alt="Twitter login" /> Login with Twitter</a>
 		<% end %>
+	</div>
 	</header>
 	
-	<%= yield %>
+	<div id="wrapper">
+		<%= yield %>
+	</div>
 	
 	<footer>
 	<p>Hand-crafted with love by <a href="https://github.com/belen-albeza">Belén Albeza</a>. Wanna <a href="<%= about_url %>">know more</a>?</p>

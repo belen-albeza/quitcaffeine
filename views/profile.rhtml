@@ -1,19 +1,26 @@
-<header>
-	<h1>@<%= @profile_user.username %></h1>
-</header>
-
-<section>
-	<header><h1>Latest shots</h1></header>
+<section id="profile-intro">
+	<header>
+		<h1>@<%= @profile_user.username %></h1>
+	</header>
 	
-	<%= partial :shots, @shots %>
+	<p>You are viewing <span class="user">@<%= @profile_user.username %></span>'s public profile of <strong>caffeine consumption</strong>. If you are a friend, relative or flatmate please keep an eye on this! And hide caffeine sources when appropriate ;&nbsp;)</p>
 </section>
 
-<section>
-	<header><h1>Stats</h1></header>
+<section id="summary">
+	<section id="stats">
+		<header><h1>Stats</h1></header>
+
+		<% if @stats[:last_shot] %>
+		<p class="last-drink"><span class="username">@<%= @profile_user.username %></span> had a <%= @stats[:source_to_track] || 'drink' %> <strong><%= ago @profile_user.last_shot.created_at %></strong>.</p>
+		<% end %>
+
+		<%= partial :stats_mini, @stats %>
+	</section>
 	
-	<% if @stats[:last_shot] %>
-	<p><strong>@<%= @profile_user.username %></strong> had a <%= @stats[:source_to_track] || 'drink' %> <%= ago @profile_user.last_shot.created_at %>.</p>
-	<% end %>
-	
-	<%= partial :stats_mini, @stats %>
+	<section id="latest">
+		<header><h1>Latest shots</h1></header>
+
+		<%= partial :shots, @shots %>
+	</section>
 </section>
+

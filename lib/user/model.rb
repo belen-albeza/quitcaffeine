@@ -16,7 +16,7 @@ class User
   end
   
   def latest_shots
-    self.shots.all(:order => [:created_at.desc])[0..10]
+    self.shots.all(:order => [:created_at.desc])[0..7]
   end
   
   def last_shot(source=nil)

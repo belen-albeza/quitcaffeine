@@ -20,7 +20,7 @@ class Source
                   :description => '1 coffee',
                   :mg => 100)
     Source.create(:slug => 'coffee2x',
-                  :name => 'coffee extra shot',
+                  :name => 'double coffee',
                   :description => '1 double coffe',
                   :mg => 200)
     Source.create(:slug => 'tea',

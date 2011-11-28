@@ -1,7 +1,7 @@
 require 'sinatra'
 
 helpers do 
-  def show_settings_url
+  def settings_url
     '/settings'
   end
   

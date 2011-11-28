@@ -17,7 +17,6 @@ module Social
       request_token = get_request_token()
       session[:tw_request_token] = request_token.token
       session[:tw_request_token_secret]= request_token.secret
-      
       return request_token.authorize_url
     end
     
