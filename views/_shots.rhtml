@@ -1,8 +1,12 @@
-<ul>
-<% for shot in @shots %>
-<li>
-	<strong><%= shot.source.description %></strong>
-	<%= ago shot.created_at %>
-</li>
+<% if @shots.size > 0 %>
+	<ul>
+	<% for shot in @shots %>
+	<li>
+		<strong><%= shot.source.description %></strong>
+		<%= ago shot.created_at %>
+	</li>
+	<% end %>
+	</ul>
+<% else %>
+	<p>No shots to display.</p>
 <% end %>
-</ul>

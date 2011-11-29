@@ -8,8 +8,8 @@ class User
   property :username, String, :unique_index => true
   property :created_at, DateTime
   
-  has n, :shots
-  has 1, :user_settings
+  has n, :shots, :constraint => :destroy
+  has 1, :user_settings, :constraint => :destroy
   
   def source_to_track
      self.user_settings.source_to_track
@@ -52,19 +52,23 @@ class User
     shots_for_day(date).count(:source => source)
   end
   
+  def cancel_account!
+    self.destroy
+  end
+  
   # =================
   # = Class methods =
   # =================
-  def User.get_or_create(username)
+  def User.get_or_create(username, can_register=true)
     # get user or create a brand new one
     user = User.first(:username => username)
-    user = User.create(:username => username) if user.nil?
-    if user.user_settings.nil?      
-      user.user_settings = UserSettings.new
-      user.save()
+    if can_register and user.nil?
+      user = User.create(:username => username)
+      if user.user_settings.nil?      
+        user.user_settings = UserSettings.new
+        user.save()
+      end
     end
-      
     return user
   end
-
 end

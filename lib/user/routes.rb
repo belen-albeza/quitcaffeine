@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'helpers'
 require 'user/twitter'
 require 'user/model'
 
@@ -17,8 +18,9 @@ get '/twitter/callback' do
   if twitter.authenticate!(session)
     redirect '/'
   else
+    session.clear
     status 403
-    'Twitter authentication failed'
+    'Twitter authentication failed. If the problem persists, delete your cookies and try again.'      
   end
 end
 
@@ -29,7 +31,13 @@ get '/profile/:username' do
   end
   
   @shots = @profile_user.latest_shots
-  @stats = @profile_user.full_stats
-  
+  @stats = @profile_user.full_stats 
   erb :profile    
+end
+
+post '/profile/delete' do
+  login_required
+  @user.cancel_account!
+  session.clear
+  redirect home_url, :notice => 'Your account has been deleted'
 end

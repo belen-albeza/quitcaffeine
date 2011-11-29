@@ -3,6 +3,8 @@ $LOAD_PATH << './lib/'
 # load gems
 require 'rubygems'
 require 'sinatra'
+require 'rack-flash'
+require 'sinatra/redirect_with_flash'
 
 # load config and libs
 require 'config'
@@ -12,14 +14,16 @@ require 'utils/rest'
 require 'models'
 require 'helpers'
 
+use Rack::Flash
+
 get '/' do
   if @user
     @sources = Source.all(:order => [:mg.asc])
     @shots = @user.latest_shots
     @stats = @user.stats_summary
-    
     template = :index
-  else 
+  else
+    @max_users = settings.max_users
     template = :anonymous
   end
   
@@ -27,6 +31,6 @@ get '/' do
 end
 
 get '/about' do
-  erb :wawa
+  redirect '/', :notice => 'Waka waka eh eh'
 end
 

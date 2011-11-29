@@ -6,15 +6,36 @@
 	<link href='http://fonts.googleapis.com/css?family=Special+Elite' rel='stylesheet' type='text/css'>
 
 	<link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" charset="utf-8">
+	
+	<script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+	</script>
+	
+	<script type="text/javascript" charset="utf-8">
+		$(document).ready(function() {
+			var flash = $('div#flash');
+			flash.slideDown(500);
+			$('a.close', flash).bind('click', function(event) {
+				event.preventDefault();
+				flash.slideUp('fast');
+			});
+		});
+	</script>
 </head>
 <body>
 	<header>
-	<div>
+	<% if flash[:notice] %>
+	<div id="flash">
+		<p class="message"><%= flash[:notice] %></p>
+		<p><a href="#" class="close">Dismiss message</a></p>
+	</div>
+	<% end %>
+	<div class="heading">
 		<h1><a href="<%= home_url %>">I'm quitting <strong>caffeine</strong>!</a></h1>
 		<% if @user %>
-		<p>Hi, <a  href="<%= profile_url @user %>" class="user">@<%= @user.username%></a> | <a href="<%= settings_url %>">Settings</a> | <a href="<%= logout_url %>">Logout</a>
+		<p>Hi, <a href="<%= profile_url @user %>" class="user">@<%= @user.username%></a> | <a href="<%= settings_url %>">Settings</a> | <a href="<%= logout_url %>">Logout</a>
 		<% else %>
-		<p>Hi, stranger! <a href="/twitter/connect" id="twitter-login"><img src="/images/twitter_small.png" alt="Twitter login" /> Login with Twitter</a>
+		<p>Hi, stranger!
+			<a href="/twitter/connect" id="twitter-login" class="button twitter"><span>Login with Twitter</span></a>
 		<% end %>
 	</div>
 	</header>
@@ -24,8 +45,7 @@
 	</div>
 	
 	<footer>
-	<p>Hand-crafted with love by <a href="https://github.com/belen-albeza">Belén Albeza</a>. Wanna <a href="<%= about_url %>">know more</a>?</p>
-	</footer>
-	
+	<p>Hand-crafted with love by <a href="https://github.com/belen-albeza">Belén Albeza</a>.</p>
+	</footer>	
 </body>
 </html>

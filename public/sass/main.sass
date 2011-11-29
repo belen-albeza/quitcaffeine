@@ -25,7 +25,6 @@
   
 @mixin std-gradient($color1, $color2)
   background-color: $color1
-  @include filter-gradient($color2, $color1, vertical)
   @include background-image(linear-gradient(top, $color2 0%, $color1 100%))
   
 @mixin page-column
@@ -34,6 +33,18 @@
   margin-left: 20px
   &:first-child
     margin-left: 0px
+    
+@mixin std-button
+  @include border-radius(8px)
+  @include std-gradient(#111, #222)  
+  padding: 10px
+  color: #ccc
+  border: 1px solid #333
+  text-decoration: none
+  &:hover
+    @include std-gradient(#151515, #2a2a2a) 
+    color: #fff
+    cursor: pointer
     
 $page-width: 800px 
 $page-hpadding: 20px 
@@ -66,17 +77,24 @@ h1
   @include big-font-size
   @include text-shadow(#111, 2px, 2px, 1px)
   
-input
-  @include std-gradient(#111, #222)
-  @include border-radius(8px)
-  padding: 10px
-  color: #ccc
-  border: 1px solid #2a2a2a
-  &:hover
-    @include std-gradient(#151515, #2a2a2a)
-    color: #fff
-    cursor: pointer
+input, a.button
+  @include std-button         
+  
+a.twitter
+  padding-left: 0px
+  span
+    padding-left: 25px
+    background: url(/images/twitter_small.png) 5px center no-repeat
 
+a.loader-right
+  padding-right: 20px
+  background: url(/images/loading.gif) -9999px center no-repeat
+  &.loading
+    background-position: right center
+    
+a#delete
+  color: $secondary-color
+  
 strong
   color: #fff
   font-weight: bold
@@ -154,29 +172,28 @@ body > header
   
   border-bottom: 1px solid #333
   
-  & > div
+  & > div.heading
     display: table
-    width: $page-width
-  
-  h1
-    @include huge-font-size
-    display: table-cell
-    width: 500px
+    width: $page-width  
+    h1
+      @include huge-font-size
+      display: table-cell
+      width: 500px
     
-    a
-      text-decoration: none
-      color: #ccc
-      strong
-        color: #ef001d
-      &:hover
-        color: #eee
+      a
+        text-decoration: none
+        color: #ccc
         strong
-          color: #ff0000
-  p
-    display: table-cell
-    vertical-align: baseline
-    text-align: right
-    width: 300px
+          color: #ef001d
+        &:hover
+          color: #eee
+          strong
+            color: #ff0000
+    p
+      display: table-cell
+      vertical-align: baseline
+      text-align: right
+      width: 300px
     
 section#settings
   form
@@ -197,6 +214,27 @@ body > footer
   @include std-gradient(#202020, #303030)
   border-top: 1px solid #000
   margin-bottom: $page-vpadding
+
+div#flash
+  @include opacity(0.85)
+  display: none
+  position: absolute
+  top: 0px
+  left: 50%
+  margin-left: #{-$page-width/2 - $page-hpadding}
+  width: #{$page-width}
+  padding: $page-vpadding #{$page-hpadding}
+  background: $secondary-color
+  text-align: center
+  z-index: 20
+  border-bottom: 5px solid #fff
+  color: #fff
+  text-align: right
+  p.message
+    @include big-font-size
+  a.close
+    color: #000
+    font-weight: bold
 
 section#shot
   input[type="submit"]
@@ -273,6 +311,12 @@ section#latest
       strong
         color: #fff
         font-weight: bold
+        
+section#whatis
+  @include page-column
+  
+section#signup
+  @include page-column
 
 section#stats
   @include page-column
@@ -289,14 +333,6 @@ section#stats
     & + p.tip
       margin-top: -20px
       margin-bottom: 30px
-      font-size: 8pt
-      margin-left: 15px
-      span.tip
-        background: $secondary-color
-        color: #fff
-        padding: 3px
-        text-transform: uppercase
-        font-weight: bold
       
   dt, dd
     background: #2a2a2a
@@ -313,3 +349,22 @@ section#stats
     &:last-child
       border-bottom: none
     
+p.tip, p.warning
+  margin-left: 15px
+  span.tip, span.warning
+    text-transform: uppercase
+  span.tip
+    background: $secondary-color
+    color: #fff
+    padding: 3px
+    font-weight: bold
+    
+p.tip
+  font-size: 8pt  
+    
+p.warning
+  @include border-radius(12px)
+  padding: 10px
+  background:  #000
+  span.warning
+    color: $secondary-color

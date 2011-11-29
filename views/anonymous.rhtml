@@ -1,19 +1,27 @@
-<section id="whatis">
-	<header>
-		<h1>What is this?</h1>
-	</header>
+<section id="intro">
+	<section id="whatis">
+		<header>
+			<h1>What is this?</h1>
+		</header>
 	
-	<p><strong>Do you want to quit caffeine?</strong> Or stop drinking coke, or coffee? Then keep reading!</p>
-	<p>In <em>I'm quitting caffeine</em> you'll be able to <strong>track your caffeine consumption</strong>, and also <strong>notify your friends &amp; family via Twitter</strong> whenever you have a drink &mdash;then they'll be able to help you by hiding your coke cans stash or giving you those <em>'yet another coffee?'</em> looks.</p>
+		<p><strong>Do you want to quit caffeine?</strong> Or stop drinking coke, or coffee? Then keep reading!</p>
+		<p>In <em>I'm quitting caffeine</em> you'll be able to <strong>track your caffeine consumption</strong>, and also <strong>notify your friends &amp; family via Twitter</strong> whenever you have a drink &mdash;then they'll be able to help you by hiding your coke cans stash or giving you those <em>'yet another coffee?'</em> looks.</p>
 	
-	<p>You need a Twitter account
-</section>
+		<p>You need a Twitter account
+	</section>
 
-<section id="signup">
-	<header>
-		<h1>Sign up!</h1>
-	</header>
-	<p>You just need to <a href="<%= login_url %>" title="Login">login with your Twitter account</a>, and then you'll be up &amp; running.</p>
+	<section id="signup">
+		<header>
+			<h1>Sign up!</h1>
+		</header>
+		<p>Registrations are currently <strong><%= can_register? ? 'opened' : 'closed' %></strong>!</p>
+		
+		<% if can_register? %>	
+		<p>You just need to <a href="<%= login_url %>" title="Login">login with your Twitter account</a>, and then you'll be up &amp; running.</p>
+		<% end %>
+	
+		<p class="warning"><span class="warning">Registration is capped to <%= @max_users %> users!</span> This is a for-fun project, so it's hosted on a free environment with capacity limits. Please <strong>cancel your account</strong> in the Settings panel if you no longer need it, so other people can join in your place.</p>
+	</section>
 </section>
 
 <%= partial :tips %>
