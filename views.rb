@@ -8,7 +8,6 @@ require 'sinatra/redirect_with_flash'
 
 # load config and libs
 require 'config'
-require 'utils/rest'
 
 # load models &controllers
 require 'models'
