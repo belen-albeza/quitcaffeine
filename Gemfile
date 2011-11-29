@@ -1,11 +1,11 @@
 source :gemcutter
 
-sinatra
-sinatra-redirect-with-flash
-redis
-twitter_oauth
-data_mapper
-dm-postgres-adapter
-dm-aggregates
-time-lord
-dalli
+gem 'sinatra'
+gem 'sinatra-redirect-with-flash'
+gem 'redis'
+gem 'twitter_oauth'
+gem 'data_mapper'
+gem 'dm-postgres-adapter'
+gem 'dm-aggregates'
+gem 'time-lord'
+gem 'dalli'
