@@ -1,5 +1,14 @@
+<script>
+	$(document).ready(function() {
+		$('form#have-shot').bind('submit', function(event) {
+			var form = $(this);
+			var loader = $('.loader-right', form)
+			loader.addClass('loading');
+		});
+	});
+</script>
 <nav>
-	<form action="<%= new_shot_url %>" method="post">
+	<form action="<%= new_shot_url %>" method="post" id="have-shot">
 		
 	<ul>
 	<% @sources.each_with_index do |item, index| %>
@@ -11,6 +20,6 @@
 	<% end %>
 	</ul>
 	
-	<p><input type="submit" value="Drink it!"> <label><input type="checkbox" name="tweet_this" value="yes" <%= 'checked' if @user.user_settings.enable_tweets %>> Tweet this?</label></p>
+	<p><input type="submit" value="Drink it!"> <label  class="loader-right"><input type="checkbox" name="tweet_this" value="yes" <%= 'checked' if @user.user_settings.enable_tweets %>> Tweet this?</label></p>
 	</form>	
 </nav>

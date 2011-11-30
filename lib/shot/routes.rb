@@ -9,7 +9,7 @@ post '/shot' do
       url = permalink(profile_url(shot.user))
       @twitter.tweet!(shot.shared_message(url))
     end
-    redirect home_url
+    redirect home_url, :notice => "#{shot.source.name.capitalize} added to your log"
   else
     raise Sinatra::NotFound
   end
