@@ -55,7 +55,6 @@ class User
   
   def units_of_source_for_day(date, source, cache=nil)
     cache_key = "user:#{self.id}:source:#{source.nil? ? 'all' : source.slug}:date:#{date}"
-    puts cache_key
     if date < Date.today() and !cache.nil?
       result = cache.get(cache_key) 
     else
