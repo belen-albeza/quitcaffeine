@@ -31,7 +31,7 @@ get '/profile/:username' do
   end
   
   @shots = @profile_user.latest_shots
-  @stats = @profile_user.full_stats 
+  @stats = @profile_user.full_stats(settings.cache) 
   erb :profile    
 end
 

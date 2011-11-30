@@ -661,3 +661,15 @@ p.warning {
 p.warning span.warning {
   color: #ef001d;
 }
+
+/* line 379, ../sass/main.sass */
+div.chart table {
+  display: none;
+  width: 400px;
+  height: 200px;
+}
+/* line 383, ../sass/main.sass */
+div.chart div.visualize {
+  font-size: 8pt;
+  margin: 20px 0px;
+}

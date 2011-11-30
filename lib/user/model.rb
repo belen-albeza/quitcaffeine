@@ -1,6 +1,8 @@
 require 'user_settings/model'
 require 'dm-aggregates'
 
+require 'date'
+
 class User
   include DataMapper::Resource
   
@@ -30,13 +32,16 @@ class User
     source_name =  self.source_to_track ? self.source_to_track.name : nil
     {:source_to_track => source_name,
      :last_shot => self.last_shot,
-     :caffeine_for_today => self.caffeine_for_day(Date.today),
-     :units_for_today => self.units_of_source_for_day(Date.today,
-                         self.source_to_track)}
+     :caffeine_for_today => self.caffeine_for_day(Date.today)}
   end
   
-  def full_stats
-    stats_summary
+  def full_stats(cache=nil)
+    stats = stats_summary
+    unless self.source_to_track.nil?
+      stats[:units_chart] = self.units_of_source_for_week(Date.today,
+                              self.source_to_track, cache)
+    end
+    return stats
   end
   
   def shots_for_day(date)
@@ -48,8 +53,32 @@ class User
     shots_for_day(date).sum(:mg) || 0
   end
   
-  def units_of_source_for_day(date, source)
-    shots_for_day(date).count(:source => source)
+  def units_of_source_for_day(date, source, cache=nil)
+    cache_key = "user:#{self.id}:source:#{source.nil? ? 'all' : source.slug}:date:#{date}"
+    puts cache_key
+    if date < Date.today() and !cache.nil?
+      result = cache.get(cache_key) 
+    else
+      result = shots_for_day(date).count(:source => source)
+    end
+    
+    if result.nil? and !cache.nil?
+      cache.set(cache_key, result)
+    end
+    
+    return result
+  end
+  
+  def units_of_source_for_week(date, source, cache=nil)
+    units = []
+    t = Date.today
+    week = [t-6, t-5, t-4, t-3, t-2, t-1, t]
+    week.each do |day|
+      units.push(:day => day.strftime('%a'),
+                 :units => units_of_source_for_day(day, source, cache))
+    end
+    
+    return units
   end
   
   def cancel_account!

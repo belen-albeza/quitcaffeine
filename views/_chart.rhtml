@@ -1,0 +1,35 @@
+<% if @stats[:units_chart].size > 0 %>
+	<% chart = @stats[:units_chart] %>
+	
+<script type="text/javascript" src="/charting/visualize.jQuery.js">
+</script>
+<script type="text/javascript" src="/charting/excanvas.js">
+</script>
+
+<script>
+	$(document).ready(function() {
+		$('table#caffeine-chart').visualize({type: 'bar', width: '300px'});	
+	});
+</script>
+
+
+<div class="chart">
+	<table id="caffeine-chart">
+		<thead>
+			<tr>
+				<% for x in chart %>
+				<th scope="col"><%= x[:day] %></th>
+				<% end %>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th scope="row"><%= @stats[:source_to_track].capitalize %> units per day</th>
+				<% for x in chart %>
+				<td><%= x[:units] %></td>
+				<% end %>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<% end %>

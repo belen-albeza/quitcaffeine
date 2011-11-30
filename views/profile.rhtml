@@ -15,6 +15,12 @@
 		<% end %>
 
 		<%= partial :stats_mini, @stats %>
+		
+		<% if @stats[:units_chart] %>
+			<%= partial :chart , @stats[:units_data] %>		
+		<% elsif @profile_user == @user %>
+		<p>Want to see more stats? <a href="<%= settings_url %>" title="Go to your settings">Start tracking</a> a specific caffeine source.</p>
+		<% end %>
 	</section>
 	
 	<section id="latest">
@@ -22,5 +28,6 @@
 
 		<%= partial :shots, @shots %>
 	</section>
+	
 </section>
 
