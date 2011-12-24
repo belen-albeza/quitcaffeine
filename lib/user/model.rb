@@ -61,7 +61,7 @@ class User
       result = shots_for_day(date).count(:source => source)
     end
     
-    if result.nil? and !cache.nil?
+    if !result.nil? and !cache.nil?
       cache.set(cache_key, result)
     end
     
