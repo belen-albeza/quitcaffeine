@@ -15,8 +15,8 @@ configure do
   set :max_users, 50
   
   set(:twitter_config, {
-    :key => 'key',
-    :secret => 'secret',
+    :key => ENV['TWITTER_KEY'] || 'key',
+    :secret => ENV['TWITTER_SECRET'] || 'secret',
     :callback_url => ENV['TWITTER_CALLBACK'] || 'http://0.0.0.0:4567/twitter/callback'
   })
   
