@@ -1,6 +1,7 @@
 require 'twitter_oauth'
 
 module Social
+  # Twitter OAuth flow inspired on https://github.com/moomerman/sinitter/blob/master/sinitter.rb
   class Twitter
     
     def initialize(config, session)
@@ -48,7 +49,7 @@ module Social
     
     def get_request_token()      
       begin
-        @client.authentication_request_token(:oauth_callback=>@oauth_callback_url)
+        @client.authentication_request_token(:oauth_callback => @oauth_callback_url)
       rescue StandardError => e
         raise TwitterError.new('Error authenticating app. Check app key and secret')
       end
@@ -59,5 +60,4 @@ module Social
   # exception classes
   class TwitterError < Exception
   end
-
 end

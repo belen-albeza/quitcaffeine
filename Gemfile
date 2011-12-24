@@ -2,7 +2,6 @@ source :gemcutter
 
 gem 'sinatra'
 gem 'sinatra-redirect-with-flash'
-gem 'redis'
 gem 'twitter_oauth'
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
